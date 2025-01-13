@@ -1,0 +1,59 @@
+@startuml progetto
+
+class Giocatore {
+    - nome: str
+    - salute: int
+    - attacco: int
+    - difesa: int
+    - livello: int
+    - esperienza: int
+    - oggetti: List<Oggetto>
+    - salute_massima: int
+    __init__(nome: str)
+    subire_danno(danno: int): bool
+    attaccare_nemico(nemico: Nemico): bool
+    guadagnare_esperienza(quantita: int)
+    salire_livello()
+    scelta_abilita()
+    guarire(oggetto: Oggetto)
+    aggiungi_oggetto(oggetto: Oggetto)
+    mostra_inventario()
+}
+ Definizione della classe Oggetto
+class Oggetto {
+    - nome: str
+    - ammontare_guarigione: int
+    __init__(nome: str, ammontare_guarigione: int)
+}
+
+
+class Nemico {
+    - nome: str
+    - salute: int
+    - attacco: int
+    - difesa: int
+    __init__(nome: str, salute: int, attacco: int, difesa: int)
+    subire_danno(danno: int): bool
+    attaccare_giocatore(giocatore: Giocatore): bool
+}
+
+
+class Gioco {
+    - giocatore: Giocatore
+    - nemico: Nemico
+    - fine_gioco: bool
+    - oggetti: List<Oggetto>
+    __init__()
+    generare_nemico()
+    battaglia()
+    usa_oggetto()
+    inizia()
+}
+
+
+Giocatore "1" *-- "*" Oggetto : possiede
+Gioco "1" *-- "1" Giocatore : include
+Gioco "1" *-- "*" Nemico : affronta
+Gioco "1" *-- "*" Oggetto : possiede
+
+@enduml
